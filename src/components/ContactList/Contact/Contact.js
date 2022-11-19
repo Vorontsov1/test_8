@@ -4,7 +4,7 @@ import { MdDeleteForever } from 'react-icons/md';
 import { getRandomHexColor, upFirst } from 'utils/index';
 
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/operations';
+import { deleteContact } from 'redux/contacts/operations';
 import {
   ContactWrapper,
   Text,
