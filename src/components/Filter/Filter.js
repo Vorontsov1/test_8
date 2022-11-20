@@ -3,7 +3,7 @@ import { setFilter } from '../../redux/contacts/filtersSlice';
 import { Container } from 'components/Filter/Filter.styled';
 import { nanoid } from 'nanoid';
 
-export const Filter = () => {
+const Filter = () => {
   const dispatch = useDispatch();
 
   const changeFilter = e => {
@@ -14,15 +14,10 @@ export const Filter = () => {
 
   return (
     <Container>
-      <div>
-        <label htmlFor={nanoid()}>Find contacts by name</label>
-        <input
-          id={nanoid()}
-          type="text"
-          name="filter"
-          onChange={changeFilter}
-        />
-      </div>
+      <label htmlFor={nanoid()}>Find contacts by name</label>
+      <input id={nanoid()} type="text" name="filter" onChange={changeFilter} />
     </Container>
   );
 };
+
+export default Filter;

@@ -12,7 +12,7 @@ import {
   Button,
 } from 'components/ContactList/Contact/Contacts.styled';
 
-export const Contact = ({ contact: { id, name, phone } }) => {
+export const Contact = ({ contact: { id, name, number } }) => {
   const dispatch = useDispatch();
   const handleDelete = () => {
     dispatch(deleteContact(id));
@@ -24,7 +24,7 @@ export const Contact = ({ contact: { id, name, phone } }) => {
 
       <Text>
         {name}
-        <span>Phone: {phone}</span>
+        <span>Phone: {number}</span>
       </Text>
 
       <Button type="button" onClick={handleDelete}>
@@ -38,7 +38,6 @@ Contact.propTypes = {
   contact: PropTypes.exact({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    createdAt: PropTypes.string,
+    number: PropTypes.string.isRequired,
   }),
 };

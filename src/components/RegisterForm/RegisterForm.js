@@ -1,27 +1,27 @@
-// import { useDispatch } from 'react-redux';
-// import { register } from 'redux/auth/operations';
+import { useDispatch } from 'react-redux';
+import { register } from 'redux/auth/operations';
 import { Form, Label } from './RegisterForm.styled';
 
 const RegisterForm = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   const form = e.currentTarget;
-  //   dispatch(
-  //     register({
-  //       name: form.elements.name.value,
-  //       email: form.elements.email.value,
-  //       password: form.elements.password.value,
-  //     })
-  //   );
-  //   form.reset();
-  // };
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const credentials = {
+      name: form.elements.name.value,
+      email: form.elements.email.value,
+      password: form.elements.password.value,
+    };
 
-  // onSubmit = { handleSubmit };
+    console.log(credentials);
+
+    dispatch(register(credentials));
+    form.reset();
+  };
 
   return (
-    <Form autoComplete="off">
+    <Form onSubmit={handleSubmit} autoComplete="off">
       <Label>
         Username
         <input type="text" name="name" />

@@ -4,7 +4,7 @@ import { addContact } from 'redux/contacts/operations';
 import { nanoid } from 'nanoid';
 import { Form } from 'components/ContactForm/ContactForm.styled';
 
-export function ContactForm() {
+export default function ContactForm() {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ export function ContactForm() {
 
     let value = {
       name: name.value,
-      phone: number.value,
+      number: number.value,
     };
     // console.log(value);
 
@@ -40,7 +40,7 @@ export function ContactForm() {
           id={nanoid()}
           type="text"
           name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
