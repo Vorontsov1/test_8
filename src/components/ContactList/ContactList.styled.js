@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-// export const ContactsList = styled.ul`
-//   display: flex;
-//   flex-direction: column;
-//   gap: 10px;
-// `;
-
 export const ContactsList = styled.ul`
   margin: 0;
   padding: 0;
@@ -13,5 +7,5 @@ export const ContactsList = styled.ul`
 `;
 
 export const ContactListItem = styled.li`
-  border-top: 1px solid #2f2f37;
+  border-top: 1px solid #5e91f2;
 `;

@@ -3,8 +3,8 @@ import { StyledNavLink } from './AuthNav.styled';
 const AuthNav = () => {
   return (
     <div>
-      <StyledNavLink to="/register">Register</StyledNavLink>
-      <StyledNavLink to="/login">Log In</StyledNavLink>
+      <StyledNavLink to="/register">Sign up</StyledNavLink>
+      <StyledNavLink to="/login">Sign in</StyledNavLink>
     </div>
   );
 };

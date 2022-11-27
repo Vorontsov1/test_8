@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ContactWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 30px;
   padding: 5px 0;
 `;
 
@@ -50,7 +50,7 @@ export const Button = styled.button`
 
   &:hover {
     svg {
-      color: #2196f3;
+      color: #63a4ff;
     }
   }
 `;

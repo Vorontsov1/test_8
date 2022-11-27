@@ -1,16 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/contacts/operations';
-import { selectError, selectIsLoading } from 'redux/contacts/selectors';
+import { selectError, selectIsLoading } from 'redux/selectors';
 
-import Phonebook from 'components/Phonebook';
-import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
-
-import { Container } from './Contacts.styled';
+import { LoaderContacts } from 'components/Loader/Loader';
+import { Container, Title } from './Contacts.styled';
 
 const Contacts = () => {
   const dispatch = useDispatch();
+
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
@@ -20,10 +19,13 @@ const Contacts = () => {
 
   return (
     <Container>
-      <Phonebook />
-      <Filter />
-      {isLoading && !error && <b>Request in progress...</b>}
-      <ContactList />
+      <Title>Contacts</Title>
+
+      {isLoading && !error ? (
+        <LoaderContacts loading={isLoading} color={'#2196f3'} />
+      ) : (
+        <ContactList />
+      )}
     </Container>
   );
 };

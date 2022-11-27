@@ -1,5 +1,6 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -21,12 +22,18 @@ export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
-      const response = await axios.post('/users/signup', credentials);
+      const { data } = await axios.post('/users/signup', credentials);
       // After successful registration, add the token to the HTTP header
-      setAuthHeader(response.data.token);
-      return response.data;
+      setAuthHeader(data.token);
+      data.user &&
+        toast.success(
+          `Congratulations! New user ${data.user.name} registered successfully.`
+        );
+      return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(
+        toast.error('You enter incorrect email or password.')
+      );
     }
   }
 );
@@ -39,13 +46,14 @@ export const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const response = await axios.post('/users/login', credentials);
+      const { data } = await axios.post('/users/login', credentials);
       // After successful login, add the token to the HTTP header
-      setAuthHeader(response.data.token);
-      // console.log(response.data);
-      return response.data;
+      setAuthHeader(data.token);
+      return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(
+        toast.error('You enter incorrect email or password.')
+      );
     }
   }
 );
@@ -61,7 +69,7 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     // After a successful logout, remove the token from the HTTP header
     clearAuthHeader();
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue(error.massage);
   }
 });
 
@@ -87,9 +95,9 @@ export const refreshUser = createAsyncThunk(
     try {
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
-      const response = await axios.get('/users/current');
+      const { data } = await axios.get('/users/current');
       // console.log(response.data);
-      return response.data;
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.massage);
     }

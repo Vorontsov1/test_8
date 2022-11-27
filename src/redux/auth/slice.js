@@ -49,6 +49,9 @@ const authSlice = createSlice({
       .addCase(logIn.fulfilled, hahandlelogInSuccess)
       .addCase(logOut.fulfilled, hahandlelogOutSuccess)
       .addCase(refreshUser.fulfilled, hahandlerefreshUserSuccess)
+      .addCase(refreshUser.pending, state => {
+        state.isRefreshing = true;
+      })
 
       .addMatcher(
         isAnyOf(
@@ -62,12 +65,12 @@ const authSlice = createSlice({
 
       .addMatcher(
         isAnyOf(
-          refreshUser.pending,
+          // refreshUser.pending,
           refreshUser.fulfilled,
           refreshUser.rejected
         ),
         state => {
-          state.isRefreshing = !state.isRefreshing;
+          state.isRefreshing = false;
         }
       );
   },

@@ -1,15 +1,20 @@
+import Container from '@mui/material/Container';
+
 import { Outlet } from 'react-router-dom';
-import AppBar from 'components/AppBar';
+import AppBar from 'components/AppBar/';
 import { Suspense } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 const Layout = () => {
   return (
-    <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 16px' }}>
+    <Container fixed sx={{ width: '920px' }}>
       <AppBar />
       <Suspense fallback={null}>
         <Outlet />
       </Suspense>
-    </div>
+
+      <Toaster position="bottom-center" reverseOrder={false} />
+    </Container>
   );
 };
 

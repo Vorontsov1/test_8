@@ -4,6 +4,8 @@ import { fetchContacts, addContact, deleteContact } from './operations';
 const contactsInitialState = {
   items: [],
   isLoading: false,
+  isLoadingAddContact: false,
+  isLoadingDeleteContact: false,
   error: null,
 };
 
@@ -14,6 +16,7 @@ const getActionsWithType = type =>
 
 const handleFetchContactsSuccess = (state, action) => {
   state.items = action.payload;
+
   // console.log(state.items);
 };
 
@@ -31,15 +34,22 @@ const handledeleteContactsSuccess = (state, action) => {
 
 const anyFulfilled = state => {
   state.isLoading = false;
+  state.isLoadingAddContact = false;
+  state.isLoadingDeleteContact = false;
   state.error = null;
 };
 
-const anyPending = state => {
-  state.isLoading = true;
-};
+// const anyPendingFetchContacts = state => {
+//   state.isLoading = true;
+// };
+// const anyPending = state => {
+//   state.isLoading = false;
+// };
 
 const anyRejected = (state, action) => {
   state.isLoading = false;
+  state.isLoadingAddContact = false;
+  state.isLoadingDeleteContact = false;
   state.error = action.payload;
 };
 
@@ -53,10 +63,40 @@ const contactsSlise = createSlice({
       .addCase(addContact.fulfilled, hahandleddContactsSuccess)
       .addCase(deleteContact.fulfilled, handledeleteContactsSuccess)
 
+      .addCase(fetchContacts.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(addContact.pending, state => {
+        state.isLoadingAddContact = true;
+      })
+      .addCase(deleteContact.pending, state => {
+        state.isLoadingDeleteContact = true;
+      })
+
       .addMatcher(isAnyOf(...getActionsWithType('fulfilled')), anyFulfilled)
-      .addMatcher(isAnyOf(...getActionsWithType('pending')), anyPending)
       .addMatcher(isAnyOf(...getActionsWithType('rejected')), anyRejected);
   },
 });
 
 export const contactsReducer = contactsSlise.reducer;
+
+//============================================================================
+// const contactsSlise = createSlice({
+//   name: 'contacts',
+//   initialState: contactsInitialState,
+
+//   extraReducers: builder => {
+//     builder
+//       .addCase(fetchContacts.fulfilled, handleFetchContactsSuccess)
+//       .addCase(addContact.fulfilled, hahandleddContactsSuccess)
+//       .addCase(deleteContact.fulfilled, handledeleteContactsSuccess)
+
+//       .addMatcher(isAnyOf(...getActionsWithType('fulfilled')), anyFulfilled)
+//       .addMatcher(isAnyOf(fetchContacts.pending), anyPendingFetchContacts)
+//       .addMatcher(
+//         isAnyOf(addContact.pending, deleteContact.pending),
+//         anyPending
+//       )
+//       .addMatcher(isAnyOf(...getActionsWithType('rejected')), anyRejected);
+//   },
+// });

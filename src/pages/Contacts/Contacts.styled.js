@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 280px;
+  width: 350px;
   padding: 20px;
 
   margin: 0 auto;
 
   border: 1px solid black;
   border-radius: 10px;
-  box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px,
-    rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+  border-color: #5e91f2;
 `;
 
+export const Title = styled.h1`
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 30px;
+  color: #003b8e;
+`;

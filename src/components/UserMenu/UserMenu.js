@@ -1,20 +1,25 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectContactsCount } from 'redux/selectors';
 import { logOut } from 'redux/auth/operations';
 import { useAuth } from 'hooks/useAuth';
-
-import { Wrapper, Username } from './UserMenu.styled';
+import { upFirstLetter } from 'utils/index';
+import { Wrapper, Username, Button } from './UserMenu.styled';
 
 const UserMenu = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();
   const handleLogOut = () => dispatch(logOut());
+  const total = useSelector(selectContactsCount);
 
   return (
     <Wrapper>
-      <Username>Welcome, {user.name}</Username>
-      <button type="button" onClick={handleLogOut}>
+      <Username>
+        {upFirstLetter(user.name)} : {total}
+      </Username>
+
+      <Button type="button" onClick={handleLogOut}>
         Logout
-      </button>
+      </Button>
     </Wrapper>
   );
 };

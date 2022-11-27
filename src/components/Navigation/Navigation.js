@@ -1,13 +1,22 @@
 import { useAuth } from 'hooks';
-import { StyledNavLink } from './Navigation.styled';
+import Filter from 'components/Filter';
+import { Wrapper, StyledNavLink } from './Navigation.styled';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
 
   return (
-    <nav>
-      <StyledNavLink to="/">Home</StyledNavLink>
-      {isLoggedIn && <StyledNavLink to="/contacts">Phonebook</StyledNavLink>}
-    </nav>
+    <Wrapper>
+      <nav>
+        <StyledNavLink to="/">Home</StyledNavLink>
+        {isLoggedIn && (
+          <>
+            <StyledNavLink to="/contacts">Phonebook</StyledNavLink>
+            <StyledNavLink to="/newcontact">New Contact</StyledNavLink>
+          </>
+        )}
+      </nav>
+      {isLoggedIn && <Filter />}
+    </Wrapper>
   );
 };
