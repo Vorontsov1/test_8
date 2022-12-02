@@ -8,11 +8,6 @@ const initialState = {
   isRefreshing: false,
 };
 
-// const extraActions = [register, logIn, logOut, refreshUser];
-// const getActionsWithType = type =>
-//   extraActions.map(extraAction => extraAction[type]);
-// console.log(getActionsWithType('fulfilled'));
-
 const handleRegisterSuccess = (state, action) => {
   state.user = action.payload.user;
   state.token = action.payload.token;
@@ -34,7 +29,6 @@ const hahandlelogOutSuccess = state => {
 const hahandlerefreshUserSuccess = (state, action) => {
   state.user = action.payload;
   state.isLoggedIn = true;
-  // state.isRefreshing = false;
 };
 
 const authSlice = createSlice({
@@ -49,6 +43,7 @@ const authSlice = createSlice({
       .addCase(logIn.fulfilled, hahandlelogInSuccess)
       .addCase(logOut.fulfilled, hahandlelogOutSuccess)
       .addCase(refreshUser.fulfilled, hahandlerefreshUserSuccess)
+
       .addCase(refreshUser.pending, state => {
         state.isRefreshing = true;
       })
@@ -77,18 +72,3 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-
-// .addCase(refreshUser.pending, state => {
-//   state.isRefreshing = true;
-// })
-// .addCase(refreshUser.rejected, state => {
-//   state.isRefreshing = false;
-// })
-
-// pending
-// .addCase(register.pending, state => state)
-// .addCase(logIn.pending, state => state)
-
-//rejected
-// .addCase(register.rejected, state => state)
-// .addCase(logIn.rejected, state => state)

@@ -19,7 +19,7 @@ const theme = createTheme();
 const RegisterForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const form = e.currentTarget;
     const credentials = {
@@ -30,8 +30,11 @@ const RegisterForm = () => {
 
     console.log(credentials);
 
-    dispatch(register(credentials));
-    form.reset();
+    const { error } = await dispatch(register(credentials));
+    console.log(error);
+    if (!error) {
+      form.reset();
+    }
   };
 
   return (

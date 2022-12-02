@@ -9,12 +9,7 @@ export const Navigation = () => {
     <Wrapper>
       <nav>
         <StyledNavLink to="/">Home</StyledNavLink>
-        {isLoggedIn && (
-          <>
-            <StyledNavLink to="/contacts">Phonebook</StyledNavLink>
-            <StyledNavLink to="/newcontact">New Contact</StyledNavLink>
-          </>
-        )}
+        {isLoggedIn && <StyledNavLink to="/contacts">Phonebook</StyledNavLink>}
       </nav>
       {isLoggedIn && <Filter />}
     </Wrapper>

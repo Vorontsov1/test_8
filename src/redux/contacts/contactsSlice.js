@@ -4,8 +4,7 @@ import { fetchContacts, addContact, deleteContact } from './operations';
 const contactsInitialState = {
   items: [],
   isLoading: false,
-  isLoadingAddContact: false,
-  isLoadingDeleteContact: false,
+  operation: null,
   error: null,
 };
 
@@ -16,8 +15,6 @@ const getActionsWithType = type =>
 
 const handleFetchContactsSuccess = (state, action) => {
   state.items = action.payload;
-
-  // console.log(state.items);
 };
 
 const hahandleddContactsSuccess = (state, action) => {
@@ -30,26 +27,23 @@ const handledeleteContactsSuccess = (state, action) => {
   );
   state.items.splice(index, 1);
   // console.log(action.payload.id);
+  // console.log(action.meta.arg);
+  // console.log(action);
 };
 
 const anyFulfilled = state => {
   state.isLoading = false;
-  state.isLoadingAddContact = false;
-  state.isLoadingDeleteContact = false;
+  state.operation = null;
   state.error = null;
 };
 
-// const anyPendingFetchContacts = state => {
-//   state.isLoading = true;
-// };
-// const anyPending = state => {
-//   state.isLoading = false;
-// };
+const anyPending = state => {
+  state.isLoading = true;
+};
 
 const anyRejected = (state, action) => {
   state.isLoading = false;
-  state.isLoadingAddContact = false;
-  state.isLoadingDeleteContact = false;
+  state.operation = null;
   state.error = action.payload;
 };
 
@@ -64,39 +58,18 @@ const contactsSlise = createSlice({
       .addCase(deleteContact.fulfilled, handledeleteContactsSuccess)
 
       .addCase(fetchContacts.pending, state => {
-        state.isLoading = true;
+        state.operation = 'fetch';
       })
       .addCase(addContact.pending, state => {
-        state.isLoadingAddContact = true;
+        state.operation = 'add';
       })
-      .addCase(deleteContact.pending, state => {
-        state.isLoadingDeleteContact = true;
+      .addCase(deleteContact.pending, (state, action) => {
+        state.operation = `${action.meta.arg}`;
       })
-
+      .addMatcher(isAnyOf(...getActionsWithType('pending')), anyPending)
       .addMatcher(isAnyOf(...getActionsWithType('fulfilled')), anyFulfilled)
       .addMatcher(isAnyOf(...getActionsWithType('rejected')), anyRejected);
   },
 });
 
 export const contactsReducer = contactsSlise.reducer;
-
-//============================================================================
-// const contactsSlise = createSlice({
-//   name: 'contacts',
-//   initialState: contactsInitialState,
-
-//   extraReducers: builder => {
-//     builder
-//       .addCase(fetchContacts.fulfilled, handleFetchContactsSuccess)
-//       .addCase(addContact.fulfilled, hahandleddContactsSuccess)
-//       .addCase(deleteContact.fulfilled, handledeleteContactsSuccess)
-
-//       .addMatcher(isAnyOf(...getActionsWithType('fulfilled')), anyFulfilled)
-//       .addMatcher(isAnyOf(fetchContacts.pending), anyPendingFetchContacts)
-//       .addMatcher(
-//         isAnyOf(addContact.pending, deleteContact.pending),
-//         anyPending
-//       )
-//       .addMatcher(isAnyOf(...getActionsWithType('rejected')), anyRejected);
-//   },
-// });

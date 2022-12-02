@@ -32,6 +32,7 @@ export const register = createAsyncThunk(
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
+        // error.massage
         toast.error('You enter incorrect email or password.')
       );
     }
@@ -49,10 +50,12 @@ export const logIn = createAsyncThunk(
       const { data } = await axios.post('/users/login', credentials);
       // After successful login, add the token to the HTTP header
       setAuthHeader(data.token);
+
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         toast.error('You enter incorrect email or password.')
+        // error.message
       );
     }
   }

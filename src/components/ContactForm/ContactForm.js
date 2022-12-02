@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import toast from 'react-hot-toast';
-import { selectContacts, selectIsLoadingAddContact } from 'redux/selectors';
+import { selectContacts, selectOperation } from 'redux/selectors';
 import { addContact } from 'redux/contacts/operations';
 import { LoaderContact } from 'components/Loader/Loader';
 
@@ -10,21 +11,20 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-export default function ContactForm() {
+export default function ContactForm({ onClose }) {
   const contacts = useSelector(selectContacts);
-  const isLoadingAddContact = useSelector(selectIsLoadingAddContact);
-  // const isLoadingAddContact = true;
+
+  const operation = useSelector(selectOperation);
 
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const form = e.target;
     const { name, number } = form;
@@ -45,14 +45,16 @@ export default function ContactForm() {
       });
     }
 
-    dispatch(addContact(value));
-
-    form.reset();
+    const { error } = await dispatch(addContact(value));
+    if (!error) {
+      form.reset();
+      onClose();
+    }
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="s">
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -112,7 +114,7 @@ export default function ContactForm() {
               type="submit"
               fullWidth
               variant="contained"
-              disabled={isLoadingAddContact}
+              disabled={operation === 'add'}
               sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -123,10 +125,9 @@ export default function ContactForm() {
                 bgcolor: '#5e92f3',
               }}
             >
-              {isLoadingAddContact ? (
+              {operation === 'add' ? (
                 <>
                   <LoaderContact
-                    loading={isLoadingAddContact}
                     color={'#ffffff'}
                     // color={'#003b8e'}
                     size={20}
@@ -143,3 +144,7 @@ export default function ContactForm() {
     </ThemeProvider>
   );
 }
+
+ContactForm.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MdDeleteForever } from 'react-icons/md';
 
 import { getRandomHexColor, upFirst } from 'utils/index';
-import { selectIsLoadingDeleteContact } from 'redux/selectors';
+import { selectOperation } from 'redux/selectors';
 import { LoaderContact } from 'components/Loader/Loader';
 import { deleteContact } from 'redux/contacts/operations';
 import {
@@ -14,8 +14,7 @@ import {
 } from 'components/ContactList/Contact/Contacts.styled';
 
 export const Contact = ({ contact: { id, name, number } }) => {
-  const isLoadingDeleteContact = useSelector(selectIsLoadingDeleteContact);
-  // const isLoadingDeleteContact = true;
+  const operation = useSelector(selectOperation);
   const dispatch = useDispatch();
 
   const handleDelete = () => {
@@ -33,11 +32,11 @@ export const Contact = ({ contact: { id, name, number } }) => {
         </Text>
 
         <Button type="button" onClick={handleDelete}>
-          {isLoadingDeleteContact ? (
+          {operation === id ? (
             <LoaderContact
-              loading={isLoadingDeleteContact}
+              loading={operation === id}
               color={'#003b8e'}
-              size={10}
+              size={18}
             />
           ) : (
             <MdDeleteForever size={28} />

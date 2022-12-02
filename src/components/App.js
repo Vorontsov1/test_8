@@ -1,8 +1,7 @@
 import { lazy, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
-import Container from '@mui/material/Container';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -17,7 +16,6 @@ const HomePage = lazy(() => import('pages/Home'));
 const RegisterPage = lazy(() => import('pages/Register'));
 const LoginPage = lazy(() => import('pages/Login'));
 const ContactsPage = lazy(() => import('pages/Contacts/'));
-const AddContact = lazy(() => import('pages/AddContact/'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -28,7 +26,7 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <Container fixed sx={{ width: '920px' }}>
+    <>
       {isRefreshing ? (
         <Backdrop
           sx={{ color: '#003b8e', zIndex: theme => theme.zIndex.drawer + 1 }}
@@ -68,19 +66,10 @@ export const App = () => {
                 />
               }
             />
-
-            <Route
-              path="/newcontact"
-              element={
-                <PrivateRoute
-                  component={<AddContact />}
-                  redirectTo={'/login'}
-                />
-              }
-            />
           </Route>
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       )}
-    </Container>
+    </>
   );
 };

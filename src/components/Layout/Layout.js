@@ -7,7 +7,7 @@ import { Toaster } from 'react-hot-toast';
 
 const Layout = () => {
   return (
-    <Container fixed sx={{ width: '920px' }}>
+    <Container fixed sx={{ width: '768px' }}>
       <AppBar />
       <Suspense fallback={null}>
         <Outlet />

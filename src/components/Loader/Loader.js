@@ -29,7 +29,6 @@ export const LoaderContacts = ({ loading, color }) => {
         cssOverride={{
           display: 'block',
         }}
-        // size={150}
         aria-label="Loading Spinner"
         data-testid="loader"
       />

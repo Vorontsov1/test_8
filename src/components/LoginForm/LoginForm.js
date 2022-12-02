@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+
 import { logIn } from 'redux/auth/operations';
 
 import Avatar from '@mui/material/Avatar';
@@ -17,7 +18,7 @@ const theme = createTheme();
 const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const form = e.currentTarget;
 
@@ -25,9 +26,11 @@ const LoginForm = () => {
       email: form.elements.email.value,
       password: form.elements.password.value,
     };
-    // console.log(credentials);
-    dispatch(logIn(credentials));
-    form.reset();
+    const { error } = await dispatch(logIn(credentials));
+
+    if (!error) {
+      form.reset();
+    }
   };
 
   return (
