@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setFilter } from 'redux/contacts/filtersSlice';
+import { setFilter } from 'redux/contacts/filterSlice';
 import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';

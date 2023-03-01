@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { MdDeleteForever } from 'react-icons/md';
+import { MdDeleteForever } from 'react-icons-md';
 
 import { getRandomHexColor, upFirst } from 'utils/index';
 import { selectOperation } from 'redux/selectors';
@@ -11,7 +11,7 @@ import {
   Text,
   Avatar,
   Button,
-} from 'components/ContactList/Contact/Contacts.styled';
+} from 'components/ContactList/Contact/Contact.styled.js';
 
 export const Contact = ({ contact: { id, name, number } }) => {
   const operation = useSelector(selectOperation);
