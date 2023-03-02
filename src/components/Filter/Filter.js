@@ -1,5 +1,9 @@
 import { useDispatch } from 'react-redux';
+<<<<<<< HEAD
 import { setFilter } from 'redux/contacts/filterSlice';
+=======
+import { setFilter } from 'redux/contacts/filtersSlice';
+>>>>>>> 97c9ad507dca3ac14b1eb18752e914f5335a46cf
 import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';

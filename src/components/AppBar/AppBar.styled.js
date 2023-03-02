@@ -6,6 +6,10 @@ export const Header = styled.header`
   position: sticky;
   z-index: 1100;
   display: flex;
+<<<<<<< HEAD
+=======
+  /* flex-direction: column; */
+>>>>>>> 97c9ad507dca3ac14b1eb18752e914f5335a46cf
   justify-content: space-between;
   align-items: center;
   padding: 10px;
@@ -30,4 +34,7 @@ export const Searchbox = styled.header`
   color: #fff;
   background-color: #3f51b5;
 `;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 97c9ad507dca3ac14b1eb18752e914f5335a46cf
