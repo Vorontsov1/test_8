@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-// selectors.js - файл объявления функций-селекторов
-
->>>>>>> 97c9ad507dca3ac14b1eb18752e914f5335a46cf
 import { createSelector } from '@reduxjs/toolkit';
 
 export const selectIsLoggedIn = state => state.auth.isLoggedIn;

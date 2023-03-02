@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-// store.js - файл создания стора Redux
->>>>>>> 97c9ad507dca3ac14b1eb18752e914f5335a46cf
 import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
@@ -16,11 +12,9 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import { contactsReducer } from './contacts/contactsSlice';
-<<<<<<< HEAD
+
 import { filterReducer } from './contacts/filterSlice';
-=======
-import { filterReducer } from './contacts/filtersSlice';
->>>>>>> 97c9ad507dca3ac14b1eb18752e914f5335a46cf
+
 import { authReducer } from './auth/slice';
 
 // Persisting token field from auth slice to localstorage

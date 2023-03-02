@@ -26,12 +26,6 @@ const handledeleteContactsSuccess = (state, action) => {
     contact => contact.id === action.payload.id
   );
   state.items.splice(index, 1);
-<<<<<<< HEAD
-=======
-  // console.log(action.payload.id);
-  // console.log(action.meta.arg);
-  // console.log(action);
->>>>>>> 97c9ad507dca3ac14b1eb18752e914f5335a46cf
 };
 
 const anyFulfilled = state => {

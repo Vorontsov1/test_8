@@ -1,10 +1,6 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-<<<<<<< HEAD
 import { RiDeleteBin5Fill } from 'react-icons/ri';
-=======
-import { MdDeleteForever } from 'react-icons/md';
->>>>>>> 97c9ad507dca3ac14b1eb18752e914f5335a46cf
 
 import { getRandomHexColor, upFirst } from 'utils/index';
 import { selectOperation } from 'redux/selectors';
@@ -15,11 +11,8 @@ import {
   Text,
   Avatar,
   Button,
-<<<<<<< HEAD
 } from 'components/ContactList/Contact/Contact.styled.js';
-=======
-} from 'components/ContactList/Contact/Contacts.styled';
->>>>>>> 97c9ad507dca3ac14b1eb18752e914f5335a46cf
+
 
 export const Contact = ({ contact: { id, name, number } }) => {
   const operation = useSelector(selectOperation);
@@ -29,7 +22,6 @@ export const Contact = ({ contact: { id, name, number } }) => {
     dispatch(deleteContact(id));
   };
 
-<<<<<<< HEAD
    return (
      <>
        <ContactWrapper>
@@ -54,32 +46,6 @@ export const Contact = ({ contact: { id, name, number } }) => {
        </ContactWrapper>
      </>
    );
-=======
-  return (
-    <>
-      <ContactWrapper>
-        <Avatar color={getRandomHexColor()}>{upFirst(name)}</Avatar>
-
-        <Text>
-          {name}
-          <span>Phone: {number}</span>
-        </Text>
-
-        <Button type="button" onClick={handleDelete}>
-          {operation === id ? (
-            <LoaderContact
-              loading={operation === id}
-              color={'#003b8e'}
-              size={18}
-            />
-          ) : (
-            <MdDeleteForever size={28} />
-          )}
-        </Button>
-      </ContactWrapper>
-    </>
-  );
->>>>>>> 97c9ad507dca3ac14b1eb18752e914f5335a46cf
 };
 
 Contact.propTypes = {
@@ -89,7 +55,4 @@ Contact.propTypes = {
     number: PropTypes.string.isRequired,
   }),
 };
-<<<<<<< HEAD
 
-=======
->>>>>>> 97c9ad507dca3ac14b1eb18752e914f5335a46cf
