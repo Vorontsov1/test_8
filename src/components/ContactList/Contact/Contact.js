@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { MdDeleteForever } from 'react-icons-md';
+import { RiDeleteBin5Fill } from 'react-icons/ri';
 
 import { getRandomHexColor, upFirst } from 'utils/index';
 import { selectOperation } from 'redux/selectors';
@@ -21,30 +21,30 @@ export const Contact = ({ contact: { id, name, number } }) => {
     dispatch(deleteContact(id));
   };
 
-  return (
-    <>
-      <ContactWrapper>
-        <Avatar color={getRandomHexColor()}>{upFirst(name)}</Avatar>
+   return (
+     <>
+       <ContactWrapper>
+         <Avatar color={getRandomHexColor()}>{upFirst(name)}</Avatar>
 
-        <Text>
-          {name}
-          <span>Phone: {number}</span>
-        </Text>
+         <Text>
+           {name}
+           <span>Phone: {number}</span>
+         </Text>
 
-        <Button type="button" onClick={handleDelete}>
-          {operation === id ? (
-            <LoaderContact
-              loading={operation === id}
-              color={'#003b8e'}
-              size={18}
-            />
-          ) : (
-            <MdDeleteForever size={28} />
-          )}
-        </Button>
-      </ContactWrapper>
-    </>
-  );
+         <Button type="button" onClick={handleDelete}>
+           {operation === id ? (
+             <LoaderContact
+               loading={operation === id}
+               color={'#003b8e'}
+               size={18}
+             />
+           ) : (
+             <RiDeleteBin5Fill size={28} />
+           )}
+         </Button>
+       </ContactWrapper>
+     </>
+   );
 };
 
 Contact.propTypes = {
@@ -54,3 +54,4 @@ Contact.propTypes = {
     number: PropTypes.string.isRequired,
   }),
 };
+
